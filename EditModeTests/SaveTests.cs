@@ -65,7 +65,7 @@ public class SaveTests
         List<Sample> afterLoad = saveData.LoadAndGetStoredSamples();
         Assert.AreEqual(sampleA, afterLoad[0]);
 
-        List<Sample> beforeAddSubmitted = saveData.GetUserSubmittedSamples();
+        List<Sample> beforeAddSubmitted = saveData.UsersSubmittedSamples;
         saveData.AddToSubmittedSamples(sampleB);
 
         saveData.UpdateSubmittedStoredSamples();
@@ -84,16 +84,16 @@ public class SaveTests
     public void AddAndClearSubmittedSamples()
     {
        // saveData.LoadSubmittedSamples();
-        List<Sample> loadedSamples = saveData.GetUserSubmittedSamples();
+        List<Sample> loadedSamples = saveData.UsersSubmittedSamples;
         int loadedSamplesSize = loadedSamples.Count;
         Assert.AreEqual(loadedSamplesSize, 0);
         saveData.AddToSubmittedSamples(new Sample());
-        loadedSamples = saveData.GetUserSubmittedSamples();
+        loadedSamples = saveData.UsersSubmittedSamples;
         int newloadedSamplesSize = loadedSamples.Count;
         Assert.AreNotEqual(loadedSamplesSize, newloadedSamplesSize);
         Assert.AreEqual(loadedSamplesSize+1, newloadedSamplesSize);
         saveData.ClearSubmittedSamplesList();
-        loadedSamples = saveData.GetUserSubmittedSamples();
+        loadedSamples = saveData.UsersSubmittedSamples;
         Assert.AreNotEqual(newloadedSamplesSize, loadedSamples.Count);
         Assert.AreEqual(loadedSamples.Count, 0);
     }
@@ -101,16 +101,16 @@ public class SaveTests
     public void AddAndClearStoredSamples()
     {
         // saveData.LoadStoredSamples();
-        List<Sample> loadedSamples = saveData.GetUserStoredSamples();
+        List<Sample> loadedSamples = saveData.UsersStoredSamples;
         int loadedSamplesSize = loadedSamples.Count;
         Assert.AreEqual(loadedSamplesSize, 0);
         saveData.AddToStoredSamples(new Sample());
-        loadedSamples = saveData.GetUserStoredSamples();
+        loadedSamples = saveData.UsersStoredSamples;
         int newloadedSamplesSize = loadedSamples.Count;
         Assert.AreNotEqual(loadedSamplesSize, newloadedSamplesSize);
         Assert.AreEqual(loadedSamplesSize + 1, newloadedSamplesSize);
         saveData.ClearStoredSamplesList();
-        loadedSamples = saveData.GetUserStoredSamples();
+        loadedSamples = saveData.UsersStoredSamples;
         Assert.AreNotEqual(newloadedSamplesSize, loadedSamples.Count);
         Assert.AreEqual(loadedSamples.Count, 0);
     }
@@ -142,94 +142,3 @@ public class SaveTests
         }
     }
 }
-
-
-/*    [Test]
-    public void LoadAndSaveSubmittedSamples()
-    {
-        saveData.LoadSubmittedSamples();
-        saveData.ClearSubmittedSamplesList();
-        List<Sample> emptyListSamples = saveData.GetUserSubmittedSamples();
-        int emptyListSamplesSize = emptyListSamples.Count;
-        Assert.AreEqual(emptyListSamplesSize, 0);
-        saveData.AddToSubmittedSamples(new Sample());
-        List<Sample> submittedSamples = saveData.GetUserSubmittedSamples();
-        int newListSize = submittedSamples.Count;
-        Assert.AreEqual(newListSize, 1);
-       
-        
-        //saveData.SaveSubmittedSamples();
-        saveData.ClearSubmittedSamplesList();
-        List<Sample> unsavedSamplesList = saveData.GetUserSubmittedSamples();
-        int unsavedSamplesListSize = unsavedSamplesList.Count;
-        saveData.LoadSubmittedSamples();
-        List<Sample> savedSamplesList = saveData.GetUserSubmittedSamples();
-        int savedSamplesListSize = savedSamplesList.Count;
-        bool result = unsavedSamplesListSize < savedSamplesListSize;
-        Assert.That(result, Is.True);
-        Assert.AreEqual(unsavedSamplesListSize, 0);
-        Assert.AreEqual(savedSamplesListSize,1);
-    }
-    [Test]
-    public void LoadStoredSamples()
-    {
-        List<Sample> beforeLoad = saveData.GetUserStoredSamples();
-        saveData.LoadStoredSamples();
-        List<Sample> afterLoad = saveData.GetUserStoredSamples();
-        Assert.AreNotEqual(afterLoad, beforeLoad);
-    }*/
-//[Test]
-/*    public void LoadAndSaveStoredSamples()
-    {
-        saveData.LoadStoredSamples();
-        saveData.ClearStoredSamplesList();
-        List<Sample> emptyListSamples = saveData.GetUserStoredSamples();
-        int emptyListSamplesSize = emptyListSamples.Count;
-        Assert.AreEqual(emptyListSamplesSize, 0);
-        saveData.AddToStoredSamples(new Sample());
-        List<Sample> StoredSamples = saveData.GetUserStoredSamples();
-        int newListSize = StoredSamples.Count;
-        Assert.AreEqual(newListSize, 1);
-        saveData.SaveStoredSamples();
-        saveData.ClearStoredSamplesList();
-        List<Sample> unsavedSamplesList = saveData.GetUserStoredSamples();
-        int unsavedSamplesListSize = unsavedSamplesList.Count;
-        saveData.LoadStoredSamples();
-        List<Sample> savedSamplesList = saveData.GetUserStoredSamples();
-        int savedSamplesListSize = savedSamplesList.Count;
-        bool result = unsavedSamplesListSize < savedSamplesListSize;
-        Assert.That(result, Is.True);
-        Assert.AreEqual(unsavedSamplesListSize, 0);
-        Assert.AreEqual(savedSamplesListSize, 1);
-    }
-    [Test]
-    public void SaveDataStoredSamples()
-    {
-        saveData.LoadStoredSamples();
-        saveData.ClearStoredSamplesList();
-        int originalCount = saveData.GetUserStoredSamples().Count;
-        Assert.AreEqual(originalCount, 0);
-        saveData.AddToStoredSamples(new Sample() { Species = "Dog" });
-        saveData.SaveStoredSamples();
-        Assert.AreNotEqual(originalCount, saveData.GetUserStoredSamples().Count);
-        saveData.ClearStoredSamplesList();
-        Assert.AreEqual(originalCount, saveData.GetUserStoredSamples().Count);
-        saveData.LoadStoredSamples();
-        Assert.AreEqual(saveData.GetUserStoredSamples().ElementAt(0).Species, "Dog");
-        int newCount = saveData.GetUserStoredSamples().Count;
-        bool result = originalCount < newCount;
-        Assert.That(result, Is.True);
-     //   yield return null;
-    }
-
-    [Test]
-    public void LoadSubmittedSamples()
-    {
-        //chekc the values 0--dfsdfa they are autoo
-        //not equal because they are new lists when loaded even if values
-        //are equal
-        List<Sample> beforeLoad = saveData.GetUserSubmittedSamples();
-
-        List<Sample> afterLoad = saveData.LoadAndGetSubmittedSamples();
-        Assert.AreNotEqual(afterLoad, beforeLoad);
-    }*/

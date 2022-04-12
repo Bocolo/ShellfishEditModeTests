@@ -25,8 +25,8 @@ public class SearchUITests
         searchSampleUI.SetSearchLimitText("3");
         searchSampleUI.SetSearchValues();
     /*    searchSampleUI.SetSeachFieldTest(0);*/
-        Assert.AreEqual(searchSampleUI.GetSearchNameSelection(),"Input");
-        Assert.AreEqual(searchSampleUI.GetSearchLimitSelection(),3);
+        Assert.AreEqual(searchSampleUI.SearchNameSelection, "Input");
+        Assert.AreEqual(searchSampleUI.SearchLimitSelection, 3);
     }
     [Test]
     public void SetSearchFieldEmpty()
@@ -34,35 +34,35 @@ public class SearchUITests
        // searchSampleUI.SetSeachFieldTest(0);
 
         searchSampleUI.SetSeachFieldTest(0);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "");
     }
     [Test]
     public void SetSearchFieldToName()
     {
         searchSampleUI.SetSeachFieldTest(1);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "Name");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "Name");
     }
     [Test]
     public void SetSearchFieldToCompany()
     {
         searchSampleUI.SetSeachFieldTest(2);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "Company");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "Company");
     }
     [Test]
     public void SetSearchFieldToSpecies()
     {
         searchSampleUI.SetSeachFieldTest(3);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "Species");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "Species");
     }
     public void SetSearchFieldToProductionWeek()
     {
         searchSampleUI.SetSeachFieldTest(4);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "ProductionWeekNo");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "ProductionWeekNo");
     }
     [Test]
     public void SetSearchFieldToDate()
     {
         searchSampleUI.SetSeachFieldTest(5);
-        Assert.AreEqual(searchSampleUI.GetSearchFieldSelection(), "Date");
+        Assert.AreEqual(searchSampleUI.SearchFieldSelection, "Date");
     }
 }
