@@ -17,20 +17,7 @@ public class LoginUI
         logInOutButtonManager = go.AddComponent<LogInOutButtonManager>();
         logInOutButtonManager.SetTestButtons();
     }
-/*    [Test]
-    public void SetLoggedinTrueTest()
-    {
-        logInOutButtonManager.SetLoggedIn(true);
-        Assert.That(logInOutButtonManager.GetLoggedIn(), Is.True);
-      
-    }
-    [Test]
-    public void SetLoggedinFalseTest()
-    {
-        logInOutButtonManager.SetLoggedIn(false);
-        Assert.That(logInOutButtonManager.GetLoggedIn(), Is.False);
-      
-    }*/
+
     [Test]
     public void TestButtonInteractable_SignedIn()
     {

@@ -23,12 +23,6 @@ public class SampleValidatorTests
         Assert.IsFalse(sampleValidator.IsDateValid("3-2-2024"));
         Assert.IsFalse(sampleValidator.IsDateValid("not a date"));
     }
-    [Test]
-    public void TestValidateValues()
-    {
-   //     Assert.IsFalse(sampleValidator.ValidateValues());
-     /*   Assert.IsFalse(sampleValidator.IsDateValid("3-2-2024"));
-        Assert.IsFalse(sampleValidator.IsDateValid("not a date"));*/
-    }
+ 
 
 }

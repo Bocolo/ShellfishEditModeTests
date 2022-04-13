@@ -13,26 +13,26 @@ public class SubmitCanvasManagerTests
         submitCanvasManager.SetUp();
     }
   
-    [Test]
+ /*   [Test]
     public void CanvasManager_Pop_Up_Set_Text()
     {
         submitCanvasManager.DisplayPopUP("Pop up text test");
-        Assert.AreEqual("Pop up text test", submitCanvasManager.Pop_up.text);
+        Assert.AreEqual("Pop up text test", submitCanvasManager.MissingValuesPopUp.text);
       
-    }
-    [Test]
+    }*/
+/*    [Test]
     public void CanvasManager_Pop_Up_Active()
     {
         submitCanvasManager.DisplayPopUP("");
-        Assert.That(submitCanvasManager.Pop_up.isActiveAndEnabled);
+        Assert.That(submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
 
     }
     [Test]
     public void CanvasManager_Pop_Up_InActive()
     {
-        Assert.That(submitCanvasManager.Pop_up.isActiveAndEnabled);
+        Assert.That(submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
         submitCanvasManager.HidePopUp();
-        Assert.That(!submitCanvasManager.Pop_up.isActiveAndEnabled);
-    }
+        Assert.That(!submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
+    }*/
    
 }

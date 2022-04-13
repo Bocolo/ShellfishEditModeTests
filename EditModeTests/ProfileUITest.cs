@@ -27,21 +27,5 @@ public class ProfileUITest
         Assert.That(profileUI.GetUserNameInputGO().activeInHierarchy, Is.True);
         Assert.That(profileUI.GetSaveProfileButtonGO().activeInHierarchy, Is.True);
     }
-    [Test]
-    public void ViewCurrentProfile()
-    {
-      /*  profileUI.GoToViewProfile();
-        Assert.That(profileUI.GetProfileTextGO().activeInHierarchy, Is.True);
-        Assert.That(profileUI.GetUpdateProfileButtonGO().activeInHierarchy, Is.True);
-        Assert.That(profileUI.GetUserCompanyInputGO().activeInHierarchy, Is.False);
-        Assert.That(profileUI.GetUserNameInputGO().activeInHierarchy, Is.False);
-        Assert.That(profileUI.GetSaveProfileButtonGO().activeInHierarchy, Is.False);*/
-    }
-    ////
-    ///In unity tests test save profle strt
- /*   [Test]
-    public void LoadTest()
-    {
-        profileUI.LoadUser();
-    }*/
+
 }
