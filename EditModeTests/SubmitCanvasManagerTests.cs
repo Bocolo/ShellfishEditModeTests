@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SubmitCanvasManagerTests
 {
-    private SubmitCanvasManager submitCanvasManager;
+   /* private SubmitCanvasManager submitCanvasManager;
     [SetUp]
     public void SetUp()
     {
         GameObject go = new GameObject();
         submitCanvasManager = go.AddComponent<SubmitCanvasManager>();
         submitCanvasManager.SetUp();
-    }
+    }*/
   
  /*   [Test]
     public void CanvasManager_Pop_Up_Set_Text()
@@ -23,16 +23,9 @@ public class SubmitCanvasManagerTests
 /*    [Test]
     public void CanvasManager_Pop_Up_Active()
     {
-        submitCanvasManager.DisplayPopUP("");
+        submitCanvasManager.MissingValuePopup("");
         Assert.That(submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
 
-    }
-    [Test]
-    public void CanvasManager_Pop_Up_InActive()
-    {
-        Assert.That(submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
-        submitCanvasManager.HidePopUp();
-        Assert.That(!submitCanvasManager.MissingValuesPopUp.isActiveAndEnabled);
     }*/
-   
+  
 }
