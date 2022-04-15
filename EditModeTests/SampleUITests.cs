@@ -9,22 +9,28 @@ public class SampleUITests
 {
     private SampleUI sampleUI;
     private List<Sample> samples;
-    [SetUp]
+    [OneTimeSetUp]
     public void ResetScene()
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
     }
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         GameObject go1 = new GameObject();
         sampleUI = go1.AddComponent<SampleUI>();
-        sampleUI.SetUpTestVariables();
 
         samples = new List<Sample>();
         samples.Add(new Sample());
         samples.Add(new Sample());
         samples.Add(new Sample());
+
+    }
+    [SetUp]
+    public void SetUpList()
+    {
+        sampleUI.SetUpTestVariables();
+       
     }
     [Test]
     public void SimplePrefabTest()

@@ -5,12 +5,12 @@ using UnityEngine;
 public class SearchUITests
 {
     SearchSampleUI searchSampleUI;
-  [SetUp]
+  [OneTimeSetUp]
     public void ResetScene()
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
     }
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         GameObject go = new GameObject();

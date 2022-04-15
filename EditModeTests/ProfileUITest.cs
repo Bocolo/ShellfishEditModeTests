@@ -5,12 +5,12 @@ using UI.Profile;
 public class ProfileUITest
 {
    private ProfileUI profileUI;
-   [SetUp]
+   [OneTimeSetUp]
     public void ResetScene()
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
     }
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         GameObject go = new GameObject();
