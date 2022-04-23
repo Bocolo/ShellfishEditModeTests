@@ -14,8 +14,8 @@ public class ProfileUITest
     public void SetUp()
     {
         GameObject go = new GameObject();
-         profileUI = go.AddComponent<ProfileUI>();
-        profileUI.SetInputTextFields();//change to objects not fields?
+        profileUI = go.AddComponent<ProfileUI>();
+        profileUI.SetGameObjects();
     }
     [Test]
     public void ViewUpdateProfile()

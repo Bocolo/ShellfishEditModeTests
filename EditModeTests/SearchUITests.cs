@@ -14,7 +14,7 @@ public class SearchUITests
     public void SetUp()
     {
         GameObject go = new GameObject();
-         searchSampleUI = go.AddComponent<SearchSampleUI>();
+        searchSampleUI = go.AddComponent<SearchSampleUI>();
         searchSampleUI.SetUpTestVariables();
       
     }
@@ -24,15 +24,13 @@ public class SearchUITests
         searchSampleUI.SetSearchInputText("Input");
         searchSampleUI.SetSearchLimitText("3");
         searchSampleUI.SetSearchValues();
-    /*    searchSampleUI.SetSeachFieldTest(0);*/
-        Assert.AreEqual(searchSampleUI.SearchNameSelection, "Input");
-        Assert.AreEqual(searchSampleUI.SearchLimitSelection, 3);
+        Assert.AreEqual("Input",searchSampleUI.SearchNameSelection);
+        Assert.AreEqual(3,searchSampleUI.SearchLimitSelection);
     }
+ 
     [Test]
     public void SetSearchFieldEmpty()
     {
-       // searchSampleUI.SetSeachFieldTest(0);
-
         searchSampleUI.SetSeachFieldTest(0);
         Assert.AreEqual(searchSampleUI.SearchFieldSelection, "");
     }
@@ -65,4 +63,5 @@ public class SearchUITests
         searchSampleUI.SetSeachFieldTest(5);
         Assert.AreEqual(searchSampleUI.SearchFieldSelection, "Date");
     }
+  
 }

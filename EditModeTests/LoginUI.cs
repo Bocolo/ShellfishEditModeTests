@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class LoginUI
 {
-    private LogInOutButtonManager logInOutButtonManager;
+    private LoginUIManager logInOutButtonManager;
 
     /// <summary>
     /// sets an empty scene
@@ -25,7 +25,7 @@ public class LoginUI
     public void SetUpButtons()
     {
         GameObject go = new GameObject();
-        logInOutButtonManager = go.AddComponent<LogInOutButtonManager>();
+        logInOutButtonManager = go.AddComponent<LoginUIManager>();
         logInOutButtonManager.SetTestButtons();
     }
     /// <summary>

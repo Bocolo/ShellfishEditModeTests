@@ -20,11 +20,6 @@ public class SampleUITests
         GameObject go1 = new GameObject();
         sampleUI = go1.AddComponent<SampleUI>();
 
-        samples = new List<Sample>();
-        samples.Add(new Sample());
-        samples.Add(new Sample());
-        samples.Add(new Sample());
-
     }
     [SetUp]
     public void SetUpList()
@@ -35,10 +30,15 @@ public class SampleUITests
     [Test]
     public void SimplePrefabTest()
     {
-        
+
+        samples = new List<Sample>();
+        samples.Add(new Sample());
+        samples.Add(new Sample());
+        samples.Add(new Sample());
+
         sampleUI.AddTextAndPrefab(samples);
         int childPrefabCount = sampleUI.GetContentParent().transform.childCount;
-        Assert.AreEqual(childPrefabCount, samples.Count);
+        Assert.AreEqual(3,childPrefabCount);//, samples.Count);
     }
     [Test]
     public void ListSamples_PrefabTest()
@@ -108,11 +108,15 @@ public class SampleUITests
         };
         sampleUI.AddTextAndPrefab(sample);
         int childPrefabCount = sampleUI.GetContentParent().transform.childCount;
+
         Assert.AreEqual(1,childPrefabCount);
+
         Text child = sampleUI.GetContentParent().GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
+
         string expectedString = "Name: " + sample.Name + "\nCompany: " + sample.Company + "\nSpecies: " + sample.Species
                + $"\nICEs Rectangle: {sample.IcesRectangleNo}"
                + "\nWeek: " + sample.ProductionWeekNo + "\nDate: " + sample.Date + "\nComment: " + sample.Comment;
+
         Assert.AreEqual(expectedString, child.text);
     }
     [Test]

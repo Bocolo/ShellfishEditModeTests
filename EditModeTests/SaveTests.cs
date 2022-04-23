@@ -45,7 +45,6 @@ public class SaveTests
         };
         saveData.AddAndSaveStoredSample(sample);
         List<Sample> afterLoad = saveData.LoadAndGetStoredSamples();
-       
         Assert.AreEqual(sample, afterLoad[0]);
         Assert.AreEqual("AddToStoredList Test", afterLoad[0].Name);
         Assert.AreNotEqual(new Sample(), afterLoad[0]);
@@ -78,9 +77,9 @@ public class SaveTests
         saveData.AddToSubmittedSamples(saveData.LoadAndGetStoredSamples()[0]);
         saveData.UpdateSubmittedStoredSamples();
         int afterUpdateStoredCount = saveData.LoadAndGetStoredSamples().Count;
-        int afterUpdateSubmittedCount = saveData.LoadAndGetSubmittedSamples().Count;//saveData.LoadAndGetSubmittedSamples().Count;
+        int afterUpdateSubmittedCount = saveData.LoadAndGetSubmittedSamples().Count;
        
-        Assert.AreEqual(beforeUpdateSubmittedCount +1, afterUpdateSubmittedCount);//new add
+        Assert.AreEqual(beforeUpdateSubmittedCount +1, afterUpdateSubmittedCount);
         Assert.AreEqual(afterUpdateStoredCount, 0);
         Assert.AreNotEqual(afterAddStoredCount, afterUpdateStoredCount);
     }
@@ -138,7 +137,6 @@ public class SaveTests
         saveData.SaveUserProfile(savedUser);
         User loadedUser = saveData.LoadUserProfile();
         Assert.AreEqual(savedUser, loadedUser);
-      //  yield return null;
     }
     [Test]
     public void LoadAndGetSubmittedSamplesTest()
