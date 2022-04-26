@@ -2,63 +2,32 @@ using NUnit.Framework;/*
 using Submit.UI;*/
 using Save.Manager;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-
 public class SaveTests
 {
-/*    [UnityTest]
-    public IEnumerator SaveDataSubmittedSamples()
+    [OneTimeSetUp]
+    public void SetUpScene()
     {
-        GameObject go = new GameObject();
-        go.AddComponent<SaveData>();
-        //add maybe get list and compare to loaded list
-       List<Sample> beforeLoad = SaveData.Instance.GetUserSubmittedSamples();
-        SaveData.Instance.LoadSubmittedSamples();
-        List<Sample> afterLoad = SaveData.Instance.GetUserSubmittedSamples();
-        Assert.AreNotEqual(afterLoad,beforeLoad );
-        SaveData.Instance.LoadSubmittedSamples();
-        SaveData.Instance.ClearSubmittedSamplesList();
-        int originalCount = SaveData.Instance.GetUserSubmittedSamples().Count;
-        Assert.AreEqual(originalCount,0);
-        SaveData.Instance.AddToSubmittedSamples(new Sample() { Species = "Dog" });
-        SaveData.Instance.SaveSubmittedSamples();
-        Assert.AreNotEqual(originalCount, SaveData.Instance.GetUserSubmittedSamples().Count);
-        SaveData.Instance.ClearSubmittedSamplesList();
-        Assert.AreEqual(originalCount, SaveData.Instance.GetUserSubmittedSamples().Count);
-        SaveData.Instance.LoadSubmittedSamples();
-        Assert.AreEqual(SaveData.Instance.GetUserSubmittedSamples().ElementAt(0).Species, "Dog");
-        int newCount = SaveData.Instance.GetUserSubmittedSamples().Count;
-        bool result = originalCount < newCount;
-        Assert.That(result, Is.True);
+        SceneManager.LoadScene(0);
+
+    }
+    [UnitySetUp]
+    public IEnumerator SetUp()
+    {
         yield return null;
-    }*/
-/*    [UnityTest]
-    public IEnumerator SaveDataStoredSamples()
+    }
+    [TearDown]
+    public void TearDown()
     {
-        GameObject go = new GameObject();
-        go.AddComponent<SaveData>();
-        SaveData.Instance.LoadStoredSamples();
-        SaveData.Instance.ClearStoredSamplesList();
-        int originalCount = SaveData.Instance.GetUserStoredSamples().Count;
-        Assert.AreEqual(originalCount, 0);
-        SaveData.Instance.AddToStoredSamples(new Sample() { Species = "Dog" });
-        SaveData.Instance.SaveStoredSamples();
-        Assert.AreNotEqual(originalCount, SaveData.Instance.GetUserStoredSamples().Count);
-        SaveData.Instance.ClearStoredSamplesList();
-        Assert.AreEqual(originalCount, SaveData.Instance.GetUserStoredSamples().Count);
-        SaveData.Instance.LoadStoredSamples();
-        Assert.AreEqual(SaveData.Instance.GetUserStoredSamples().ElementAt(0).Species, "Dog");
-        int newCount = SaveData.Instance.GetUserStoredSamples().Count;
-        bool result = originalCount < newCount;
-        Assert.That(result, Is.True);
-        yield return null;
-    }*/
-    [UnityTest]
-    public IEnumerator SaveDataUserProfile()
+        SaveData.Instance.DeleteSubmittedSamplesFromDevice();
+        SaveData.Instance.UpdateSubmittedStoredSamples();
+    }
+    [Test]
+    public void SaveUserProfileTest()
     {
-        GameObject go = new GameObject();
-        go.AddComponent<SaveData>();
         User savedUser = new User()
         {
             Name = "Test User",
@@ -68,74 +37,140 @@ public class SaveTests
         };
         SaveData.Instance.SaveUserProfile(savedUser);
         User loadedUser = SaveData.Instance.LoadUserProfile();
-        Assert.AreEqual(savedUser,loadedUser);
-        yield return null;
+        Assert.AreEqual(savedUser, loadedUser);
+    }
+    [Test]
+    public void AddAndSaveToSubmittedListTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToSubmittedList Test"
+        };
+        SaveData.Instance.AddAndSaveSubmittedSample(sample);
+        List<Sample> afterLoad = SaveData.Instance.LoadAndGetSubmittedSamples();
+        Assert.AreEqual(sample, afterLoad[0]);
+        Assert.AreNotEqual(new Sample(), afterLoad[0]);
+    }
+    [Test]
+    public void AddAndSaveToStoredListTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToStoredList Test"
+        };
+        SaveData.Instance.AddAndSaveStoredSample(sample);
+        List<Sample> afterLoad = SaveData.Instance.LoadAndGetStoredSamples();
+        Assert.AreEqual(sample, afterLoad[0]);
+        Assert.AreNotEqual(new Sample(), afterLoad[0]);
+    }
+    [Test]
+    public void AddToSubmittedListTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToSubmittedList Test"
+        };
+        SaveData.Instance.AddToSubmittedSamples(sample);
+        List<Sample> submittedSamples = SaveData.Instance.UsersSubmittedSamples;
+        Assert.AreEqual(sample, submittedSamples[0]);
+        Assert.AreEqual(sample.Name, submittedSamples[0].Name);
+        Assert.AreNotEqual(new Sample(), submittedSamples[0]);
+    }
+    [Test]
+    public void AddToStoredListTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToStoredList Test"
+        };
+        SaveData.Instance.AddToStoredSamples(sample);
+        List<Sample> storedSamples = SaveData.Instance.UsersStoredSamples;
+        Assert.AreEqual(sample, storedSamples[0]);
+        Assert.AreEqual(sample.Name, storedSamples[0].Name);
+        Assert.AreNotEqual(new Sample(), storedSamples[0]);
+    }
+
+    [Test]
+    public void UpdateSubmittedStoredSamplesTestSimple()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToStoredList Test"
+        };
+        SaveData.Instance.AddToStoredSamples(sample);
+        SaveData.Instance.UpdateSubmittedStoredSamples();
+        List<Sample> storedSamples = SaveData.Instance.UsersStoredSamples;
+        Assert.IsEmpty( storedSamples);
+        List<Sample> loadedStoredSamples = SaveData.Instance.LoadAndGetStoredSamples();
+        Assert.IsEmpty(loadedStoredSamples);
+
+    }
+    [Test]
+    public void UpdateSubmittedStoredSamplesTestExtended()
+    {
+        Sample sampleA = new Sample
+        {
+            Name = "UpdateSubmitted_StoredSamples Test"
+        };
+        Sample sampleB = new Sample
+        {
+            Name = "AddToSubmittedList Test"
+        };
+        int beforeAddStoredCount = SaveData.Instance.LoadAndGetStoredSamples().Count;
+        SaveData.Instance.AddAndSaveStoredSample(sampleA);
+        int afterAddStoredCount = SaveData.Instance.LoadAndGetStoredSamples().Count;
+
+        Assert.AreEqual(beforeAddStoredCount + 1, afterAddStoredCount);
+
+        int beforeUpdateSubmittedCount = SaveData.Instance.LoadAndGetSubmittedSamples().Count;
+        SaveData.Instance.AddToSubmittedSamples(SaveData.Instance.LoadAndGetStoredSamples()[0]);
+        SaveData.Instance.UpdateSubmittedStoredSamples();
+        int afterUpdateStoredCount = SaveData.Instance.LoadAndGetStoredSamples().Count;
+        int afterUpdateSubmittedCount = SaveData.Instance.LoadAndGetSubmittedSamples().Count;// SaveData.Instance.LoadAndGetSubmittedSamples().Count;
+
+        Assert.AreEqual(beforeUpdateSubmittedCount + 1, afterUpdateSubmittedCount);//new add
+        Assert.AreEqual(afterUpdateStoredCount, 0);
+        Assert.AreNotEqual(afterAddStoredCount, afterUpdateStoredCount);
+
+    }
+    [Test]
+    public void LoadAndGetSubmittedSamplesTest()
+    {
+        List<Sample> afterLoad = SaveData.Instance.LoadAndGetSubmittedSamples();
+        Assert.IsNotNull(afterLoad);
+    }
+    [Test]
+    public void LoadAndGetStoredSamplesTest()
+    {
+        List<Sample> afterLoad = SaveData.Instance.LoadAndGetStoredSamples();
+        Assert.IsNotNull(afterLoad);
+    }
+    [Test]
+    public void ClearSubmittedTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToSubmittedList Test"
+        };
+        SaveData.Instance.AddToSubmittedSamples(sample);
+        List<Sample> submittedSamples = SaveData.Instance.UsersSubmittedSamples;
+        Assert.IsNotEmpty(submittedSamples);
+        SaveData.Instance.ClearSubmittedSamplesList();
+        Assert.IsEmpty(submittedSamples);
+    }
+    [Test]
+    public void ClearStoredTest()
+    {
+        Sample sample = new Sample
+        {
+            Name = "AddToStoredList Test"
+        };
+        SaveData.Instance.AddToStoredSamples(sample);
+        List<Sample> storedSamples = SaveData.Instance.UsersStoredSamples;
+        Assert.IsNotEmpty(storedSamples);
+        SaveData.Instance.ClearStoredSamplesList();
+        Assert.IsEmpty(storedSamples);
+
+        
     }
 }
-/*     
- *     
- *     
- *     
- *       
- *       
- *           [UnityTest]
-    public IEnumerator MenuScene()
-    {
-        GameObject go = new GameObject();
-        BackToMenu btm = go.AddComponent<BackToMenu>();
-        btm.ReturnToMenu();
-        yield return null;
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 0);
-    }
-    [UnityTest]
-    public IEnumerator MenuScenes()
-    {
-        GameObject go = new GameObject();
-        Menu menu = go.AddComponent<Menu>();
-        menu.SubmitPage();
-        yield return null;
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 1);
-       menu.UserSamplesPage();
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 3);
-        menu.ProfilePage();
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 4);
-        menu.LoginPage();
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 5);
-        menu.HelpPage();
-        Assert.AreEqual(SceneManager.GetActiveScene().buildIndex, 6);
-    }
- *       
- *       List<Sample> submittedSamples = new List<Sample>();
-        Assert.That(submittedSamples, Is.Empty);
-        submittedSamples.Add(new Sample());
-        Assert.That(submittedSamples, Is.Not.Empty);
-        SaveData.Instance.ClearSubmittedSamplesList();
-        submittedSamples =   SaveData.Instance.GetUserSubmittedSamples();
-        Assert.That(submittedSamples, Is.Empty);
-        SaveData.Instance.AddToSubmittedSamples(new Sample());
-        Assert.That(submittedSamples, Is.Empty);
-        yield return null;
- *     
- *     
- *     GameObject go = new GameObject();
-        go.AddComponent<SaveData>();
-        List<Sample> submittedSamples= SaveData.Instance.GetUserSubmittedSamples();
-        // yield return null;
-        yield return new WaitForSeconds(1);
-        *//*        Assert.IsEmpty( submittedSamples);*//*
-        Assert.AreEqual(1, submittedSamples.Count);
-        yield return new WaitForSeconds(1);
-        SaveData.Instance.AddToSubmittedSamples(new Sample());
-        Assert.AreEqual(1, submittedSamples.Count);
-        List<Sample> storedSamples = SaveData.Instance.GetUserStoredSamples();
-        Assert.IsEmpty(storedSamples);
-        SaveData.Instance.AddToStoredSamples(new Sample());
-        Assert.AreEqual(1, storedSamples.Count);
-        SaveData.Instance.ClearStoredSamples();
-        Assert.AreEqual(0, storedSamples.Count);
-    //    SaveData.Instance.LoadStoredSamples();
-        SaveData.Instance.SaveSubmittedSamples();
-        SaveData.Instance.AddToSubmittedSamples(new Sample());
-        Assert.AreEqual(2, submittedSamples.Count);
-        submittedSamples = SaveData.Instance.GetUserSubmittedSamples();
-        Assert.AreEqual(1, submittedSamples.Count);*/
