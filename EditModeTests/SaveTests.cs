@@ -16,6 +16,7 @@ public class SaveTests
     {
         GameObject go = new GameObject();
          saveData = go.AddComponent<SaveData>();
+        saveData.SetSaveDataLogic();
     }
     [TearDown]
     public void TearDown()

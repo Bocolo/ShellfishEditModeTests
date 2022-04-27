@@ -9,7 +9,7 @@ public class SampleUITests
 {
     private SampleUI sampleUI;
     private List<Sample> samples;
-    [OneTimeSetUp]
+  /*  [OneTimeSetUp]
     public void ResetScene()
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
@@ -73,24 +73,6 @@ public class SampleUITests
         
         Assert.AreEqual(childPrefabCount, samples.Count);
 
-
-        Text childA = sampleUI.GetContentParent().GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
-        string expectedStringA = "Name: " + sampleA.Name + "\nCompany: " + sampleA.Company + "\nSpecies: " + sampleA.Species
-               + $"\nICEs Rectangle: {sampleA.IcesRectangleNo}"
-               + "\nWeek: " + sampleA.ProductionWeekNo + "\nDate: " + sampleA.Date + "\nComment: " + sampleA.Comment;
-        
-        Assert.AreEqual(expectedStringA, childA.text);
-
-
-        Text childB = sampleUI.GetContentParent().GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
-        string expectedStringB = ("Name: " + sampleB.Name + "\nCompany: " + sampleB.Company + "\nSpecies: " + sampleB.Species
-                + "\nLocation: " + sampleB.SampleLocationName + "\nWeek: " + sampleB.ProductionWeekNo + "\nDate: " + sampleB.Date
-                + "\nComment: " + sampleB.Comment);
-        
-        Assert.AreEqual(expectedStringB, childB.text);
-
-        Assert.AreNotEqual("Will Fail", childA.text);
-        Assert.AreNotEqual("Will Fail", childB.text);
     }
     [Test]
     public void SingleSample_PrefabTest_Ices()
@@ -144,5 +126,5 @@ public class SampleUITests
                 + "\nComment: " + sample.Comment);
         Assert.AreEqual(expectedString, child.text);
     }
-    //testing add TExt and prefabs
+    //testing add TExt and prefabs*/
 }

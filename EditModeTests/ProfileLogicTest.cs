@@ -6,12 +6,12 @@ using UnityEngine.TestTools;
 using Profile.Logic;
 public class ProfileLogicTest
 {
-    private ProfileLogicSample profileLogic;
+    private ProfileLogic profileLogic;
 
     [OneTimeSetUp]
     public void SetUp()
     {
-        profileLogic = new ProfileLogicSample();
+        profileLogic = new ProfileLogic();
     }
     [Test]
     public void GetProfileText_Test()
