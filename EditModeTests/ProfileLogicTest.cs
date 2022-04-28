@@ -29,13 +29,7 @@ public class ProfileLogicTest
                     5
                     + "\n\n<b>No of Submitted Samples from this Device: </b>" +
                     6;
-        Assert.AreEqual(actualText, expectedText);
+        Assert.AreEqual(expectedText, actualText);
     }
-/*    [Test]
-    public void CreateProfile_Test()
-    {
-        //SaveData saveData
-    }*/
 
-   
 }

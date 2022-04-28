@@ -15,7 +15,7 @@ public class SaveTests
     public void SetUp()
     {
         GameObject go = new GameObject();
-         saveData = go.AddComponent<SaveData>();
+        saveData = go.AddComponent<SaveData>();
         saveData.SetSaveDataLogic();
     }
     [TearDown]
@@ -144,6 +144,7 @@ public class SaveTests
     {
         List<Sample> afterLoad = saveData.LoadAndGetSubmittedSamples();
         Assert.IsNotNull(afterLoad);
+       
     }
     [Test]
     public void LoadAndGetStoredSamplesTest()

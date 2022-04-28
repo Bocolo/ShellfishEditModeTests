@@ -2,12 +2,16 @@ using NUnit.Framework;
 using UI.Authentication;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using Login.Logic;
+using UnityEngine.UI;
 /// <summary>
 /// Tests the LogInOutButtonManager in Edit Mode
 /// </summary>
-public class LoginUI
+public class LoginLogicTests
 {
-    private LoginUIManager logInOutButtonManager;
+    private LoginLogic loginLogic;
+    private Button loginButton;
+    private Button logoutButton;
 
     /// <summary>
     /// sets an empty scene
@@ -24,36 +28,32 @@ public class LoginUI
     [OneTimeSetUp]
     public void SetUpButtons()
     {
-        GameObject go = new GameObject();
-        logInOutButtonManager = go.AddComponent<LoginUIManager>();
-        logInOutButtonManager.SetTestButtons();
+        loginLogic = new LoginLogic();
+        GameObject go = new GameObject(); 
+        GameObject go2 = new GameObject();
+        loginButton = go.AddComponent<Button>();
+        logoutButton = go2.AddComponent<Button>();
     }
     /// <summary>
-    /// Uses "#if UNITY_INCLUDE_TESTS" methods to access private details varaibles
-    /// 
     /// assess if buttons are correctly actived/deactivated based on bool
     /// </summary>
-
     [Test]
     public void TestButtonInteractable_SignedIn()
     {
-
-        logInOutButtonManager.TestButtonInteractable(true);
-        Assert.That(logInOutButtonManager.GetLoginButton().interactable, Is.False);
-        Assert.That(logInOutButtonManager.GetSignoutButton().interactable, Is.True);
+        loginLogic.SetButtonInteractable(true, loginButton, logoutButton);
+        Assert.That(loginButton.interactable, Is.False);
+        Assert.That(logoutButton.interactable, Is.True);
     }
     /// <summary>
-    /// Uses "#if UNITY_INCLUDE_TESTS" methods to access private details varaibles
-    /// 
     /// assess if buttons are correctly actived/deactivated based on bool
     /// </summary>
     [Test]
     public void TestButtonInteractable_SignedOut()
     {
 
-        logInOutButtonManager.TestButtonInteractable(false);
-
-        Assert.That(logInOutButtonManager.GetLoginButton().interactable, Is.True);
-        Assert.That(logInOutButtonManager.GetSignoutButton().interactable, Is.False);
+        loginLogic.SetButtonInteractable(false, loginButton, logoutButton);
+        Assert.That(loginButton.interactable, Is.True);
+        Assert.That(logoutButton.interactable, Is.False);
     }
+   
 }

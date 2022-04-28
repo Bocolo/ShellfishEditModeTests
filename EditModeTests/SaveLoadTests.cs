@@ -63,7 +63,6 @@ public class SaveLoadTests
         Assert.AreEqual(user.Name, loadedUser.Name);
         Assert.AreEqual(user.Company, loadedUser.Company);
         Assert.AreEqual(user.SubmittedSamplesCount, loadedUser.SubmittedSamplesCount);
-
     }
 
 
