@@ -7,7 +7,7 @@ using UnityEditor.SceneManagement;
 /// </summary>
 public class SampleDetailsLogicTests
 {
-    private SampleDetailsLogic sampleDetails;
+    private SampleLogic sampleDetails;
     [OneTimeSetUp]
     public void ResetScene()
     {
@@ -16,7 +16,7 @@ public class SampleDetailsLogicTests
     [OneTimeSetUp]
     public void SetUp()
     {
-        sampleDetails = new SampleDetailsLogic();
+        sampleDetails = new SampleLogic();
     }
     /// <summary>
     /// tests a valid date is authenticated
@@ -136,7 +136,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingOrDualLocation_Test_BothNull()
     {
-        Assert.AreEqual("You must enter <i>either</i> a Sample Location Date or an Ices Rectangle No.\n",
+        Assert.AreEqual("You must enter <i>either</i> a Sample Location Date <i>or</i> an Ices Rectangle No.\n",
             sampleDetails.MissingOrDualLocation("", null,null));
     }
     /// <summary>
@@ -146,7 +146,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingOrDualLocation_Test_BothNotNull()
     {
-        Assert.AreEqual("You must enter <i>either</i> a Sample Location Date or an Ices Rectangle No.\n",
+        Assert.AreEqual("You must enter <i>either</i> a Sample Location Date <i>or</i> an Ices Rectangle No.\n",
             sampleDetails.MissingOrDualLocation("", "dsad", "dasda"));
     }
     /// <summary>

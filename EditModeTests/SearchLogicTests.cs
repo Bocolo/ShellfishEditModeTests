@@ -11,6 +11,7 @@ public class SearchLogicTests
     {
         searchLogic = new SearchLogic();
     }
+    #region "GetSearchLimit Tests"
     /// <summary>
     /// The following tests test the return value of the
     /// GetSearchLimit function is as expected
@@ -33,6 +34,8 @@ public class SearchLogicTests
     {
         Assert.AreEqual(100, searchLogic.GetSearchLimit("dog"));
     }
+    #endregion
+    #region "GetSearchField Tests"
     /// <summary>
     /// The following tests test the return value of the
     /// GetSearchField function is as expected
@@ -77,4 +80,6 @@ public class SearchLogicTests
         Assert.AreEqual("", searchLogic.GetSearchField(50));
 
     }
+    #endregion
+
 }
