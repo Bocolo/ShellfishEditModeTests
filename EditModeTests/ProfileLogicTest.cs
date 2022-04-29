@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using App.Profile;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using Profile.Logic;
+using Users.Data;
+/// <summary>
+/// tests the profile logic script
+/// </summary>
 public class ProfileLogicTest
 {
     private ProfileLogic profileLogic;
-
+    /// <summary>
+    /// creates the profile logic object
+    /// </summary>
     [OneTimeSetUp]
     public void SetUp()
     {
         profileLogic = new ProfileLogic();
     }
+    /// <summary>
+    /// tests the correct profile text is returned
+    /// </summary>
     [Test]
     public void GetProfileText_Test()
     {

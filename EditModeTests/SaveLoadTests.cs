@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using App.SaveSystem;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using Save.Logic;
+using Samples.Data;
+using System.Collections.Generic;
+using Users.Data;
+
 public class SaveLoadTests
 {
     private SaveDataLogic saveData;
@@ -13,7 +13,9 @@ public class SaveLoadTests
     {
         saveData = new SaveDataLogic();
     }
-
+    /// <summary>
+    /// Test the Save Data load and save sample functions
+    /// </summary>
     [Test]
     public void SaveAndLoadSamples_Test()
     {
@@ -48,6 +50,9 @@ public class SaveLoadTests
         Assert.AreEqual(samplesList[1], loadedSamplesList[1]);
         Assert.AreEqual(samplesList, loadedSamplesList);
     }
+    /// <summary>
+    /// Test the Save Data load and save user functions
+    /// </summary>
     [Test]
     public void SaveAndLoadUser_Test()
     {

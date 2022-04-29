@@ -1,8 +1,7 @@
+using App.Authentication.UI;
 using NUnit.Framework;
-using UI.Authentication;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using Login.Logic;
 using UnityEngine.UI;
 /// <summary>
 /// Tests the LogInOutButtonManager in Edit Mode

@@ -1,5 +1,5 @@
+using App.Samples;
 using NUnit.Framework;
-using Search.Logic;
 public class SearchLogicTests
 {
     private SearchLogic searchLogic;
