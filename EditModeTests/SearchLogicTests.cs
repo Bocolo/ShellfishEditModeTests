@@ -1,5 +1,8 @@
 using App.Samples;
 using NUnit.Framework;
+/// <summary>
+/// test the search logic script
+/// </summary>
 public class SearchLogicTests
 {
     private SearchLogic searchLogic;
@@ -8,7 +11,13 @@ public class SearchLogicTests
     {
         searchLogic = new SearchLogic();
     }
-
+    /// <summary>
+    /// The following tests test the return value of the
+    /// GetSearchLimit function is as expected
+    /// this method parses a string to an int and returns the int
+    /// if the string cant be parsed 100 is returned
+    /// i
+    /// </summary>
     [Test]
     public void GetSearchLimit_Test_1()
     {
@@ -24,6 +33,10 @@ public class SearchLogicTests
     {
         Assert.AreEqual(100, searchLogic.GetSearchLimit("dog"));
     }
+    /// <summary>
+    /// The following tests test the return value of the
+    /// GetSearchField function is as expected
+    /// </summary>
     [Test]
     public void SetSearchFieldEmpty()
     {
