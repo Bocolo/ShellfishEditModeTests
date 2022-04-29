@@ -5,11 +5,11 @@ using NUnit.Framework;
 /// </summary>
 public class SearchLogicTests
 {
-    private SearchLogic searchLogic;
+    private SearchLogic _searchLogic;
     [OneTimeSetUp]
     public void SetUp()
     {
-        searchLogic = new SearchLogic();
+        _searchLogic = new SearchLogic();
     }
     #region "GetSearchLimit Tests"
     /// <summary>
@@ -22,17 +22,17 @@ public class SearchLogicTests
     [Test]
     public void GetSearchLimit_Test_1()
     {
-        Assert.AreEqual(1, searchLogic.GetSearchLimit("1"));
+        Assert.AreEqual(1, _searchLogic.GetSearchLimit("1"));
     }
     [Test]
     public void GetSearchLimit_Test_100()
     {
-        Assert.AreEqual(100, searchLogic.GetSearchLimit("100"));
+        Assert.AreEqual(100, _searchLogic.GetSearchLimit("100"));
     }
     [Test]
     public void GetSearchLimit_Test_100_FromInvalidInput()
     {
-        Assert.AreEqual(100, searchLogic.GetSearchLimit("dog"));
+        Assert.AreEqual(100, _searchLogic.GetSearchLimit("dog"));
     }
     #endregion
     #region "GetSearchField Tests"
@@ -43,41 +43,41 @@ public class SearchLogicTests
     [Test]
     public void SetSearchFieldEmpty()
     {
-        Assert.AreEqual("",searchLogic.GetSearchField(0));
+        Assert.AreEqual("",_searchLogic.GetSearchField(0));
     }
     [Test]
     public void SetSearchFieldToName()
     {
-        Assert.AreEqual("Name", searchLogic.GetSearchField(1));
+        Assert.AreEqual("Name", _searchLogic.GetSearchField(1));
     }
     [Test]
     public void SetSearchFieldToCompany()
     {
-        Assert.AreEqual("Company", searchLogic.GetSearchField(2));
+        Assert.AreEqual("Company", _searchLogic.GetSearchField(2));
 
        
     }
     [Test]
     public void SetSearchFieldToSpecies()
     {
-        Assert.AreEqual("Species", searchLogic.GetSearchField(3));
+        Assert.AreEqual("Species", _searchLogic.GetSearchField(3));
 
     }
     public void SetSearchFieldToProductionWeek()
     {
-        Assert.AreEqual("ProductionWeekNo", searchLogic.GetSearchField(4));
+        Assert.AreEqual("ProductionWeekNo", _searchLogic.GetSearchField(4));
 
     }
     [Test]
     public void SetSearchFieldToDate()
     {
-        Assert.AreEqual("Date", searchLogic.GetSearchField(5));
+        Assert.AreEqual("Date", _searchLogic.GetSearchField(5));
 
     }
     [Test]
     public void SetSearchFieldToDefault()
     {
-        Assert.AreEqual("", searchLogic.GetSearchField(50));
+        Assert.AreEqual("", _searchLogic.GetSearchField(50));
 
     }
     #endregion

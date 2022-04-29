@@ -8,9 +8,9 @@ using UnityEngine.UI;
 /// </summary>
 public class LoginLogicTests
 {
-    private LoginLogic loginLogic;
-    private Button loginButton;
-    private Button logoutButton;
+    private LoginLogic _loginLogic;
+    private Button _loginButton;
+    private Button _logoutButton;
 
     /// <summary>
     /// sets an empty scene
@@ -27,11 +27,11 @@ public class LoginLogicTests
     [OneTimeSetUp]
     public void SetUpButtons()
     {
-        loginLogic = new LoginLogic();
+        _loginLogic = new LoginLogic();
         GameObject go = new GameObject(); 
         GameObject go2 = new GameObject();
-        loginButton = go.AddComponent<Button>();
-        logoutButton = go2.AddComponent<Button>();
+        _loginButton = go.AddComponent<Button>();
+        _logoutButton = go2.AddComponent<Button>();
     }
     /// <summary>
     /// assess if buttons are correctly actived/deactivated based on bool
@@ -39,9 +39,9 @@ public class LoginLogicTests
     [Test]
     public void TestButtonInteractable_SignedIn()
     {
-        loginLogic.SetButtonInteractable(true, loginButton, logoutButton);
-        Assert.That(loginButton.interactable, Is.False);
-        Assert.That(logoutButton.interactable, Is.True);
+        _loginLogic.SetButtonInteractable(true, _loginButton, _logoutButton);
+        Assert.That(_loginButton.interactable, Is.False);
+        Assert.That(_logoutButton.interactable, Is.True);
     }
     /// <summary>
     /// assess if buttons are correctly actived/deactivated based on bool
@@ -50,9 +50,9 @@ public class LoginLogicTests
     public void TestButtonInteractable_SignedOut()
     {
 
-        loginLogic.SetButtonInteractable(false, loginButton, logoutButton);
-        Assert.That(loginButton.interactable, Is.True);
-        Assert.That(logoutButton.interactable, Is.False);
+        _loginLogic.SetButtonInteractable(false, _loginButton, _logoutButton);
+        Assert.That(_loginButton.interactable, Is.True);
+        Assert.That(_logoutButton.interactable, Is.False);
     }
    
 }

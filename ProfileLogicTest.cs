@@ -6,14 +6,14 @@ using Users.Data;
 /// </summary>
 public class ProfileLogicTest
 {
-    private ProfileLogic profileLogic;
+    private ProfileLogic _profileLogic;
     /// <summary>
     /// creates the profile logic object
     /// </summary>
     [OneTimeSetUp]
     public void SetUp()
     {
-        profileLogic = new ProfileLogic();
+        _profileLogic = new ProfileLogic();
     }
     /// <summary>
     /// tests the correct profile text is returned
@@ -27,7 +27,7 @@ public class ProfileLogicTest
             Company = "Company Inc.",
 
         };
-        string actualText =profileLogic.GetProfileText(user,5,6);
+        string actualText =_profileLogic.GetProfileText(user,5,6);
         string expectedText = "<b>Name : </b>" + "Jimmy"
                     + "\n\n<b>Company: </b>" + "Company Inc."
                     + "\n\n<b>No of Stored Samples on Device: </b>" +

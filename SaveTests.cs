@@ -10,7 +10,7 @@ using Users.Data;
 /// </summary>
 public class SaveTests
 {
-    private SaveData saveData;
+    private SaveData _saveData;
     [OneTimeSetUp]
     public void ResetScene()
     {
@@ -20,8 +20,8 @@ public class SaveTests
     public void SetUp()
     {
         GameObject go = new GameObject();
-        saveData = go.AddComponent<SaveData>();
-        saveData.SetSaveDataLogic();
+        _saveData = go.AddComponent<SaveData>();
+        _saveData.SetSaveDataLogic();
     }
     /// <summary>
     /// clears submitted and stored samples after test
@@ -29,8 +29,8 @@ public class SaveTests
     [TearDown]
     public void TearDown()
     {
-        saveData.DeleteSubmittedSamplesFromDevice();
-        saveData.UpdateSubmittedStoredSamples();
+        _saveData.DeleteSubmittedSamplesFromDevice();
+        _saveData.UpdateSubmittedStoredSamples();
     }
     /// <summary>
     /// tests the AddAndSaveSubmittedSample and LoadAndGetSubmittedSamples methods
@@ -42,8 +42,8 @@ public class SaveTests
         {
             Name = "AddToSubmittedList Test"
         };
-        saveData.AddAndSaveSubmittedSample(sample);
-        List<Sample> afterLoad = saveData.LoadAndGetSubmittedSamples();
+        _saveData.AddAndSaveSubmittedSample(sample);
+        List<Sample> afterLoad = _saveData.LoadAndGetSubmittedSamples();
         Assert.AreEqual(sample, afterLoad[0]);
         Assert.AreEqual("AddToSubmittedList Test", afterLoad[0].Name);
         Assert.AreNotEqual(new Sample(), afterLoad[0]);
@@ -58,8 +58,8 @@ public class SaveTests
         {
             Name = "AddToStoredList Test"
         };
-        saveData.AddAndSaveStoredSample(sample);
-        List<Sample> afterLoad = saveData.LoadAndGetStoredSamples();
+        _saveData.AddAndSaveStoredSample(sample);
+        List<Sample> afterLoad = _saveData.LoadAndGetStoredSamples();
         Assert.AreEqual(sample, afterLoad[0]);
         Assert.AreEqual("AddToStoredList Test", afterLoad[0].Name);
         Assert.AreNotEqual(new Sample(), afterLoad[0]);
@@ -83,17 +83,17 @@ public class SaveTests
         {
             Name = "AddToSubmittedList Test"
         };
-        int beforeAddStoredCount = saveData.LoadAndGetStoredSamples().Count;
-        saveData.AddAndSaveStoredSample(sampleA);
-        int afterAddStoredCount = saveData.LoadAndGetStoredSamples().Count;
+        int beforeAddStoredCount = _saveData.LoadAndGetStoredSamples().Count;
+        _saveData.AddAndSaveStoredSample(sampleA);
+        int afterAddStoredCount = _saveData.LoadAndGetStoredSamples().Count;
        
         Assert.AreEqual(beforeAddStoredCount + 1, afterAddStoredCount);
        
-        int beforeUpdateSubmittedCount = saveData.LoadAndGetSubmittedSamples().Count;
-        saveData.AddToSubmittedSamples(saveData.LoadAndGetStoredSamples()[0]);
-        saveData.UpdateSubmittedStoredSamples();
-        int afterUpdateStoredCount = saveData.LoadAndGetStoredSamples().Count;
-        int afterUpdateSubmittedCount = saveData.LoadAndGetSubmittedSamples().Count;
+        int beforeUpdateSubmittedCount = _saveData.LoadAndGetSubmittedSamples().Count;
+        _saveData.AddToSubmittedSamples(_saveData.LoadAndGetStoredSamples()[0]);
+        _saveData.UpdateSubmittedStoredSamples();
+        int afterUpdateStoredCount = _saveData.LoadAndGetStoredSamples().Count;
+        int afterUpdateSubmittedCount = _saveData.LoadAndGetSubmittedSamples().Count;
        
         Assert.AreEqual(beforeUpdateSubmittedCount +1, afterUpdateSubmittedCount);
         Assert.AreEqual(afterUpdateStoredCount, 0);
@@ -110,11 +110,11 @@ public class SaveTests
         {
             Name = "AddToStoredList Test"
         };
-        saveData.AddToStoredSamples(sample);
-        saveData.UpdateSubmittedStoredSamples();
-        List<Sample> storedSamples = saveData.UsersStoredSamples;
+        _saveData.AddToStoredSamples(sample);
+        _saveData.UpdateSubmittedStoredSamples();
+        List<Sample> storedSamples = _saveData.UsersStoredSamples;
         Assert.IsEmpty(storedSamples);
-        List<Sample> loadedStoredSamples = saveData.LoadAndGetStoredSamples();
+        List<Sample> loadedStoredSamples = _saveData.LoadAndGetStoredSamples();
         Assert.IsEmpty(loadedStoredSamples);
 
     }
@@ -124,15 +124,15 @@ public class SaveTests
     [Test]
     public void AddAndClearSubmittedSamples()
     {
-        int loadedSamplesSize = saveData.UsersSubmittedSamples.Count;
+        int loadedSamplesSize = _saveData.UsersSubmittedSamples.Count;
         Assert.AreEqual(loadedSamplesSize, 0);
-        saveData.AddToSubmittedSamples(new Sample());
-        int newloadedSamplesSize = saveData.UsersSubmittedSamples.Count;
+        _saveData.AddToSubmittedSamples(new Sample());
+        int newloadedSamplesSize = _saveData.UsersSubmittedSamples.Count;
         Assert.AreNotEqual(loadedSamplesSize, newloadedSamplesSize);
         Assert.AreEqual(loadedSamplesSize+1, newloadedSamplesSize);
-        saveData.ClearSubmittedSamplesList();
-        Assert.AreNotEqual(newloadedSamplesSize, saveData.UsersSubmittedSamples.Count);
-        Assert.AreEqual(saveData.UsersSubmittedSamples.Count, 0);
+        _saveData.ClearSubmittedSamplesList();
+        Assert.AreNotEqual(newloadedSamplesSize, _saveData.UsersSubmittedSamples.Count);
+        Assert.AreEqual(_saveData.UsersSubmittedSamples.Count, 0);
     }
     /// <summary>
     /// tests the ClearStoredSamplesList method clears the sample list
@@ -140,15 +140,15 @@ public class SaveTests
     [Test]
     public void AddAndClearStoredSamples()
     {
-        int loadedSamplesSize = saveData.UsersStoredSamples.Count;
+        int loadedSamplesSize = _saveData.UsersStoredSamples.Count;
         Assert.AreEqual(loadedSamplesSize, 0);
-        saveData.AddToStoredSamples(new Sample());
-        int newloadedSamplesSize = saveData.UsersStoredSamples.Count;
+        _saveData.AddToStoredSamples(new Sample());
+        int newloadedSamplesSize = _saveData.UsersStoredSamples.Count;
         Assert.AreNotEqual(loadedSamplesSize, newloadedSamplesSize);
         Assert.AreEqual(loadedSamplesSize + 1, newloadedSamplesSize);
-        saveData.ClearStoredSamplesList();
-        Assert.AreNotEqual(newloadedSamplesSize, saveData.UsersStoredSamples.Count);
-        Assert.AreEqual(saveData.UsersStoredSamples.Count, 0);
+        _saveData.ClearStoredSamplesList();
+        Assert.AreNotEqual(newloadedSamplesSize, _saveData.UsersStoredSamples.Count);
+        Assert.AreEqual(_saveData.UsersStoredSamples.Count, 0);
     }
     /// <summary>
     /// Tests the save and load user profile functions
@@ -163,8 +163,8 @@ public class SaveTests
             Email = "Test Email",
             SubmittedSamplesCount = 10
         };
-        saveData.SaveUserProfile(savedUser);
-        User loadedUser = saveData.LoadUserProfile();
+        _saveData.SaveUserProfile(savedUser);
+        User loadedUser = _saveData.LoadUserProfile();
         Assert.AreEqual(savedUser, loadedUser);
     }
     /// <summary>
@@ -173,7 +173,7 @@ public class SaveTests
     [Test]
     public void LoadAndGetSubmittedSamplesTest()
     {
-        List<Sample> afterLoad = saveData.LoadAndGetSubmittedSamples();
+        List<Sample> afterLoad = _saveData.LoadAndGetSubmittedSamples();
         Assert.IsNotNull(afterLoad);
        
     }
@@ -183,7 +183,7 @@ public class SaveTests
     [Test]
     public void LoadAndGetStoredSamplesTest()
     {
-        List<Sample> afterLoad = saveData.LoadAndGetStoredSamples();
+        List<Sample> afterLoad = _saveData.LoadAndGetStoredSamples();
         Assert.IsNotNull(afterLoad);
     }
     /// <summary>
@@ -197,10 +197,10 @@ public class SaveTests
         {
             Name = "AddToSubmittedList Test"
         };
-        saveData.AddToSubmittedSamples(sample);
-        List<Sample> submittedSamples = saveData.UsersSubmittedSamples;
+        _saveData.AddToSubmittedSamples(sample);
+        List<Sample> submittedSamples = _saveData.UsersSubmittedSamples;
         Assert.IsNotEmpty(submittedSamples);
-        saveData.ClearSubmittedSamplesList();
+        _saveData.ClearSubmittedSamplesList();
         Assert.IsEmpty(submittedSamples);
     }
     /// <summary>
@@ -214,10 +214,10 @@ public class SaveTests
         {
             Name = "AddToStoredList Test"
         };
-        saveData.AddToStoredSamples(sample);
-        List<Sample> storedSamples = saveData.UsersStoredSamples;
+        _saveData.AddToStoredSamples(sample);
+        List<Sample> storedSamples = _saveData.UsersStoredSamples;
         Assert.IsNotEmpty(storedSamples);
-        saveData.ClearStoredSamplesList();
+        _saveData.ClearStoredSamplesList();
         Assert.IsEmpty(storedSamples);
 
 

@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class PopUpTests
 {
-    private PopUp popup;
+    private PopUp _popup;
     /// <summary>
     /// sets an empty scene
     /// </summary>
@@ -23,7 +23,7 @@ public class PopUpTests
     public void SetUp()
     {
         GameObject go = new GameObject();
-         popup = go.AddComponent<PopUp>();
+         _popup = go.AddComponent<PopUp>();
     }
     /// <summary>
     /// set the pop up to deactivated
@@ -31,7 +31,7 @@ public class PopUpTests
     [SetUp]
     public void SetUpDeactivatePopUp()
     {
-        popup.gameObject.SetActive(false);
+        _popup.gameObject.SetActive(false);
     }
     /// <summary>
     /// tests PopUpAcknowleged deactivates the popup
@@ -39,9 +39,9 @@ public class PopUpTests
     [Test]
     public void AcknowledgePopUp()
     {
-        popup.gameObject.SetActive(true);
-        Assert.IsTrue(popup.gameObject.activeInHierarchy);
-        popup.PopUpAcknowleged();
-        Assert.That(popup.gameObject.activeInHierarchy, Is.False);
+        _popup.gameObject.SetActive(true);
+        Assert.IsTrue(_popup.gameObject.activeInHierarchy);
+        _popup.PopUpAcknowleged();
+        Assert.That(_popup.gameObject.activeInHierarchy, Is.False);
     }
 }

@@ -6,12 +6,12 @@ using Users.Data;
 
 public class SaveLoadTests
 {
-    private SaveDataLogic saveData;
+    private SaveDataLogic _saveDatLogca;
 
     [OneTimeSetUp]
     public void SetUp()
     {
-        saveData = new SaveDataLogic();
+        _saveDatLogca = new SaveDataLogic();
     }
     /// <summary>
     /// Test the Save Data load and save sample functions
@@ -42,8 +42,8 @@ public class SaveLoadTests
         };
         samplesList.Add(sampleA);
         samplesList.Add(sampleB);
-        saveData.SaveSamples("saveSamplesTest", samplesList);
-        List<Sample> loadedSamplesList = saveData.LoadSamples("saveSamplesTest");
+        _saveDatLogca.SaveSamples("saveSamplesTest", samplesList);
+        List<Sample> loadedSamplesList = _saveDatLogca.LoadSamples("saveSamplesTest");
         Assert.AreEqual(samplesList.Count, loadedSamplesList.Count);
 
         Assert.AreEqual(samplesList[0], loadedSamplesList[0]);
@@ -62,8 +62,8 @@ public class SaveLoadTests
             Company = "Company",
             SubmittedSamplesCount = 5
         };
-        saveData.SaveUser("saveUserTest", user);
-       User loadedUser= saveData.LoadUserProfile("saveUserTest");
+        _saveDatLogca.SaveUser("saveUserTest", user);
+       User loadedUser= _saveDatLogca.LoadUserProfile("saveUserTest");
         Assert.AreEqual(user, loadedUser);
         Assert.AreEqual(user.Name, loadedUser.Name);
         Assert.AreEqual(user.Company, loadedUser.Company);

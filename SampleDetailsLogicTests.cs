@@ -7,7 +7,7 @@ using UnityEditor.SceneManagement;
 /// </summary>
 public class SampleDetailsLogicTests
 {
-    private SampleLogic sampleDetails;
+    private SampleLogic _sampleLogic;
     [OneTimeSetUp]
     public void ResetScene()
     {
@@ -16,7 +16,7 @@ public class SampleDetailsLogicTests
     [OneTimeSetUp]
     public void SetUp()
     {
-        sampleDetails = new SampleLogic();
+        _sampleLogic = new SampleLogic();
     }
     /// <summary>
     /// tests a valid date is authenticated
@@ -24,7 +24,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void TestIsDateValid_Pass_PassedData()
     {
-        Assert.IsTrue(sampleDetails.IsDateValid("3-2-2022"));
+        Assert.IsTrue(_sampleLogic.IsDateValid("3-2-2022"));
        
     }
     /// <summary>
@@ -33,7 +33,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void TestIsDateValid_Fail_FutureDate()
     {
-        Assert.IsFalse(sampleDetails.IsDateValid("3-2-2024"));
+        Assert.IsFalse(_sampleLogic.IsDateValid("3-2-2024"));
     }
     /// <summary>
     /// tests an invalid string  is not authenticated as a date
@@ -41,7 +41,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void TestIsDateValid_Fail_NotADate()
     {
-        Assert.IsFalse(sampleDetails.IsDateValid("not a date"));
+        Assert.IsFalse(_sampleLogic.IsDateValid("not a date"));
     }
     /// <summary>
     /// tests tehe correct sample string is returned: with ices location
@@ -64,7 +64,7 @@ public class SampleDetailsLogicTests
                  + $"\nICEs Rectangle: 254"
                  + "\nWeek: " + 22 + "\nDate: "
                  + "date" + "\nComment: " + "comment";
-        string actualString = sampleDetails.SampleWithIcesToString(sample);
+        string actualString = _sampleLogic.SampleWithIcesToString(sample);
         Assert.AreEqual(expectedString, actualString);
 
     }
@@ -90,7 +90,7 @@ public class SampleDetailsLogicTests
                     + "\nLocation: " + "254"
                   + "\nWeek: " + 22 + "\nDate: "
                  + "date" + "\nComment: " + "comment";
-        string actualString = sampleDetails.SampleWithLocationToString(sample);
+        string actualString = _sampleLogic.SampleWithLocationToString(sample);
         Assert.AreEqual(expectedString, actualString);
 
     }
@@ -100,7 +100,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void GetDate_Test()
     {
-        Assert.AreEqual("2022-02-02", sampleDetails.GetDate("02", "02", "2022"));
+        Assert.AreEqual("2022-02-02", _sampleLogic.GetDate("02", "02", "2022"));
     }
     /// <summary>
     /// MissingName method
@@ -109,7 +109,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingName_Test()
     {
-        Assert.AreEqual("Please enter a name\n", sampleDetails.MissingName("", null));
+        Assert.AreEqual("Please enter a name\n", _sampleLogic.MissingName("", null));
     }
     /// <summary>
     /// MissingDate method
@@ -118,7 +118,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingDate_Test()
     {
-        Assert.AreEqual("Please enter a valid date\n", sampleDetails.MissingDate("", null));
+        Assert.AreEqual("Please enter a valid date\n", _sampleLogic.MissingDate("", null));
     }
     /// <summary>
     /// MissingCompany method
@@ -127,7 +127,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingCompany_Test()
     {
-        Assert.AreEqual("Please enter a company name\n", sampleDetails.MissingCompany("", null));
+        Assert.AreEqual("Please enter a company name\n", _sampleLogic.MissingCompany("", null));
     }
     /// <summary>
     /// MissingOrDualLocation method
@@ -137,7 +137,7 @@ public class SampleDetailsLogicTests
     public void MissingOrDualLocation_Test_BothNull()
     {
         Assert.AreEqual("You must enter <i>either</i> a Sample Location Date <i>or</i> an Ices Rectangle No.\n",
-            sampleDetails.MissingOrDualLocation("", null,null));
+            _sampleLogic.MissingOrDualLocation("", null,null));
     }
     /// <summary>
     /// MissingOrDualLocation method
@@ -147,7 +147,7 @@ public class SampleDetailsLogicTests
     public void MissingOrDualLocation_Test_BothNotNull()
     {
         Assert.AreEqual("You must enter <i>either</i> a Sample Location Date <i>or</i> an Ices Rectangle No.\n",
-            sampleDetails.MissingOrDualLocation("", "dsad", "dasda"));
+            _sampleLogic.MissingOrDualLocation("", "dsad", "dasda"));
     }
     /// <summary>
     /// MissingProductionWeek method
@@ -156,7 +156,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingProductionWeek_Test()
     {
-        Assert.AreEqual("Please enter the production week\n", sampleDetails.MissingProductionWeek("", 0));
+        Assert.AreEqual("Please enter the production week\n", _sampleLogic.MissingProductionWeek("", 0));
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingName_Test_Empty()
     {
-        Assert.AreEqual("", sampleDetails.MissingName("", "name"));
+        Assert.AreEqual("", _sampleLogic.MissingName("", "name"));
     }
     /// <summary>
     /// MissingDate method
@@ -175,7 +175,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingDate_Test_Empty()
     {
-        Assert.AreEqual("", sampleDetails.MissingDate("", "2022 - 02 - 02"));
+        Assert.AreEqual("", _sampleLogic.MissingDate("", "2022 - 02 - 02"));
     }
     /// <summary>
     /// MissingCompany method
@@ -184,7 +184,7 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingCompany_Test_Empty()
     {
-        Assert.AreEqual("", sampleDetails.MissingCompany("", "Company"));
+        Assert.AreEqual("", _sampleLogic.MissingCompany("", "Company"));
     }
     /// <summary>
     /// MissingOrDualLocation method
@@ -194,7 +194,7 @@ public class SampleDetailsLogicTests
     public void MissingOrDualLocation_Test_Location_Empty()
     {
         Assert.AreEqual("",
-            sampleDetails.MissingOrDualLocation("", "Rectangle", null));
+            _sampleLogic.MissingOrDualLocation("", "Rectangle", null));
     }
     /// <summary>
     /// MissingOrDualLocation method
@@ -204,7 +204,7 @@ public class SampleDetailsLogicTests
     public void MissingOrDualLocation_Test_Rectangle_Empty()
     {
         Assert.AreEqual("",
-            sampleDetails.MissingOrDualLocation("", null, "Location"));
+            _sampleLogic.MissingOrDualLocation("", null, "Location"));
     }
     /// <summary>
     /// MissingProductionWeek method
@@ -213,6 +213,6 @@ public class SampleDetailsLogicTests
     [Test]
     public void MissingProductionWeek_Test_Empty()
     {
-        Assert.AreEqual("", sampleDetails.MissingProductionWeek("", 5));
+        Assert.AreEqual("", _sampleLogic.MissingProductionWeek("", 5));
     }
 }
